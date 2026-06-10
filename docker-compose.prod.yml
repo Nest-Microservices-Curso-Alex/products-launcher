@@ -14,7 +14,7 @@ services:
     build:
       context: ./client-gateway
       dockerfile: dockerfile.prod
-    image: client-gateway-prod
+    image: northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/client-gateway
     ports:
       - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
     environment:
@@ -28,7 +28,7 @@ services:
     build:
       context: ./auth-ms
       dockerfile: dockerfile.prod
-    image: auth-ms
+    image: northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/auth-ms
     environment:
       - PORT=3004
       - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
@@ -42,7 +42,7 @@ services:
     build:
       context: ./products-ms
       dockerfile: dockerfile.prod
-    image: products-ms
+    image: northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/products-ms
     volumes:
       - products-db:/usr/src/app/prisma # 👈 persiste el archivo .db
     environment:
@@ -59,7 +59,7 @@ services:
       dockerfile: dockerfile.prod
       args:
         - ORDER_DB_URL=${ORDER_DB_URL}
-    image: orders-ms
+    image: northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/orders-ms
     environment:
       - PORT=3002
       - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
@@ -72,7 +72,7 @@ services:
     build:
       context: ./payments-ms
       dockerfile: dockerfile.prod
-    image: payments-ms
+    image: northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/payments-ms
     ports:
       - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
     environment:

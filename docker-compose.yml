@@ -26,29 +26,29 @@ services:
   # ===================================================
   # Auth Microservice
   # ===================================================
-  # auth-ms:
-  #   build: ./auth-ms
-  #   volumes:
-  #     - ./auth-ms/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   environment:
-  #     - PORT=3004
-  #     - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
-  #     - DATABASE_URL=${AUTH_DB_URL}
-  #     - JWT_SECRET=${JWT_SECRET}
+  auth-ms:
+    build: ./auth-ms
+    volumes:
+      - ./auth-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3004
+      - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
+      - DATABASE_URL=${AUTH_DB_URL}
+      - JWT_SECRET=${JWT_SECRET}
 
-  # # ===================================================
-  # # Products Microservice
-  # # ===================================================
-  # products-ms:
-  #   build: ./products-ms
-  #   volumes:
-  #     - ./products-ms/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   environment:
-  #     - PORT=3001
-  #     - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
-  #     - DATABASE_URL=file:./prisma/dev.db
+  # ===================================================
+  # Products Microservice
+  # ===================================================
+  products-ms:
+    build: ./products-ms
+    volumes:
+      - ./products-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3001
+      - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
+      - DATABASE_URL=file:./prisma/dev.db
 
   # ===================================================
   # Orders Microservice
@@ -85,18 +85,18 @@ services:
   # ===================================================
   # Payments Microservice
   # ===================================================
-  # payments-ms:
-  #   container_name: payments-ms
-  #   build: ./payments-ms
-  #   volumes:
-  #     - ./payments-ms/src:/usr/src/app/src
-  #   command: npm run start:dev
-  #   ports:
-  #     - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
-  #   environment:
-  #     - PORT=${PAYMENTS_MS_PORT}
-  #     - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
-  #     - STRIPE_SECRET=${STRIPE_SECRET}
-  #     - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
-  #     - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
-  #     - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
+  payments-ms:
+    container_name: payments-ms
+    build: ./payments-ms
+    volumes:
+      - ./payments-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    ports:
+      - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
+    environment:
+      - PORT=${PAYMENTS_MS_PORT}
+      - NATS_SERVERS=nats://nats-server:4222,nats://nats-server:4223
+      - STRIPE_SECRET=${STRIPE_SECRET}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
